@@ -1,6 +1,6 @@
 {
   "name": "@sfu/sfu-client",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "A webRTC client designed to work with @sfu/sfu-server",
   "main": "dist/sfu-client.ssr.js",
   "browser": "dist/sfu-client.esm.js",

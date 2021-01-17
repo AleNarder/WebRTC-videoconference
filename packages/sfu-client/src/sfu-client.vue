@@ -83,15 +83,24 @@
 
 <script lang="ts">
 import { SFUConnection } from '@/lib/sfu'
-import Vue from 'vue'
+import Vue, { PropType } from 'vue'
 import { createMessage } from '@/lib/message'
+
+type configOption = {
+  socketOptions: {
+    url: string
+    protocols?: string | string[]
+  }
+  rtcOptions?: RTCConfiguration
+  debug: boolean
+}
 
 export default Vue.extend({
   name: 'sfu-client',
   props: {
     config: {
       required: true,
-      type: Object,
+      type: Object as PropType<configOption>,
     },
   },
   data(): {

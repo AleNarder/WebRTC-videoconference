@@ -4,5 +4,12 @@
     "target": "ES2015",
     "sourceMap": true,
     "module": "CommonJS"
-  }
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dev/**/*.ts"
+  ]
 }

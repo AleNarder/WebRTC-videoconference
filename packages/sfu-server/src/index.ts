@@ -1,11 +1,10 @@
-import WsManager from './lib/wsManager';
-export default function main(): void {
+import WsManager from './lib/wsManager'
+import { ServerOptions } from 'ws'
+export default function (options?: ServerOptions): void {
   try {
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const wssManager = new WsManager();
+    const wssManager = new WsManager(options)
   } catch (e) {
-    console.log(e);
+    console.log(e)
   }
 }
-
-main();

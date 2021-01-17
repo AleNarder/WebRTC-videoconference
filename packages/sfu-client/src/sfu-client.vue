@@ -88,6 +88,12 @@ import { createMessage } from '@/lib/message'
 
 export default Vue.extend({
   name: 'sfu-client',
+  props: {
+    config: {
+      required: true,
+      type: Object,
+    },
+  },
   data(): {
     global: Window
     connectionStatus: boolean
@@ -176,13 +182,13 @@ export default Vue.extend({
     },
   },
   methods: {
-    getMeetingFromUrl() {
+    getMeetingFromUrl(): string | null {
       const queryString = this.global.location.search
       const urlParams = new URLSearchParams(queryString)
       return urlParams.get('meetingId')
     },
     setupSFU() {
-      this.sfu = new SFUConnection(this.$sfuOptions)
+      this.sfu = new SFUConnection(this.config)
       this.sfuEvents.forEach((event: string) => {
         const sanitizedEventName = event.split('-').join('')
         const handlerName = `on${sanitizedEventName

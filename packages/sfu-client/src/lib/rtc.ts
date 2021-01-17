@@ -1,5 +1,5 @@
 import logDown from 'logdown'
-import { createMessage } from './message'
+import { createMessage } from '@/lib/message'
 export default class RTCConnection extends EventTarget {
   private static readonly RTC_EVENTS: Array<keyof RTCPeerConnectionEventMap> = [
     'datachannel',
@@ -13,7 +13,10 @@ export default class RTCConnection extends EventTarget {
   private _peerConnection!: RTCPeerConnection | undefined
   private readonly _logger: logDown.Logger
   private readonly _config: RTCConfiguration | undefined
-  private readonly _listeners: Map<keyof RTCPeerConnectionEventMap, (...args: unknown[]) => any>
+  private readonly _listeners: Map<
+    keyof RTCPeerConnectionEventMap,
+    (...args: unknown[]) => any
+  >
 
   constructor(config?: RTCConfiguration) {
     super()
@@ -21,7 +24,10 @@ export default class RTCConnection extends EventTarget {
     this._logger = logDown('sfu:RTCConnection')
     this._listeners = new Map()
     RTCConnection.RTC_EVENTS.forEach((event) => {
-      const handlerName = `_on${event.charAt(0).toUpperCase().concat(event.slice(1))}`
+      const handlerName = `_on${event
+        .charAt(0)
+        .toUpperCase()
+        .concat(event.slice(1))}`
       // @ts-expect-error
       const handler = this[handlerName].bind(this)
       if (handler) this._listeners.set(event, handler)
@@ -48,7 +54,9 @@ export default class RTCConnection extends EventTarget {
 
   private _setupConnection() {
     if (!this._peerConnection) {
-      this._peerConnection = new RTCPeerConnection(this._config ?? this._getDefaultConfiguration())
+      this._peerConnection = new RTCPeerConnection(
+        this._config ?? this._getDefaultConfiguration()
+      )
       this._addListeners()
     }
   }
@@ -91,7 +99,9 @@ export default class RTCConnection extends EventTarget {
   addTrack(track: MediaStreamTrack, stream?: MediaStream) {
     if (!this._peerConnection) this._setupConnection()
     try {
-      const aSenderAlreadyExists = this._peerConnection?.getSenders().find((sender) => sender.track?.id === track.id)
+      const aSenderAlreadyExists = this._peerConnection
+        ?.getSenders()
+        .find((sender) => sender.track?.id === track.id)
       if (!aSenderAlreadyExists) {
         if (stream) {
           this._peerConnection!.addTrack(track, stream)
@@ -105,7 +115,9 @@ export default class RTCConnection extends EventTarget {
     }
   }
 
-  async setLocalDescription(answer?: RTCSessionDescription | RTCSessionDescriptionInit): Promise<void> {
+  async setLocalDescription(
+    answer?: RTCSessionDescription | RTCSessionDescriptionInit
+  ): Promise<void> {
     if (!this._peerConnection) this._setupConnection()
     try {
       const description = answer ?? (await this._peerConnection!.createOffer())
@@ -146,7 +158,9 @@ export default class RTCConnection extends EventTarget {
 
   async setIceCandidates(candidate: RTCIceCandidate | null) {
     if (candidate) {
-      await this._peerConnection!.addIceCandidate(new RTCIceCandidate(candidate))
+      await this._peerConnection!.addIceCandidate(
+        new RTCIceCandidate(candidate)
+      )
       this._logger.log('ice candidate added!')
     } else {
       this._logger.log('ice candidate negotiation finished')

@@ -1,5 +1,5 @@
 import logDown from 'logdown'
-import { WSMessage } from './message'
+import { WSMessage } from '@/lib/message'
 
 type socketOptions = {
   url: string
@@ -8,7 +8,12 @@ type socketOptions = {
 
 type signalingEvent = keyof RTCDataChannelEventMap & keyof WebSocketEventMap
 class SignalingChannel extends EventTarget {
-  private static readonly SIGNALING_EVENTS: Array<signalingEvent> = ['close', 'error', 'message', 'open']
+  private static readonly SIGNALING_EVENTS: Array<signalingEvent> = [
+    'close',
+    'error',
+    'message',
+    'open',
+  ]
   private readonly _options: socketOptions
   private readonly _logger: logDown.Logger
   // @ts-expect-error
@@ -29,15 +34,19 @@ class SignalingChannel extends EventTarget {
   }
 
   private _addListeners(channel: RTCDataChannel | WebSocket) {
-    this.handlers.forEach((handler: EventListenerOrEventListenerObject, event: string) => {
-      channel.addEventListener(event, handler)
-    })
+    this.handlers.forEach(
+      (handler: EventListenerOrEventListenerObject, event: string) => {
+        channel.addEventListener(event, handler)
+      }
+    )
   }
 
   private _removeListeners(channel: RTCDataChannel | WebSocket) {
-    this.handlers.forEach((handler: EventListenerOrEventListenerObject, event: string) => {
-      channel.removeEventListener(event, handler)
-    })
+    this.handlers.forEach(
+      (handler: EventListenerOrEventListenerObject, event: string) => {
+        channel.removeEventListener(event, handler)
+      }
+    )
   }
   // @ts-expect-error ts(6133)
   private _onOpen(ev: Event) {
@@ -70,7 +79,9 @@ class SignalingChannel extends EventTarget {
     if (!this._channel) {
       this._logger.log('connecting...')
       const { url, protocols } = this._options
-      const upgradedUrl = `${url}/?payload=${encodeURI(JSON.stringify({ username, meetingId }))}`
+      const upgradedUrl = `${url}/?payload=${encodeURI(
+        JSON.stringify({ username, meetingId })
+      )}`
       this._channel = new WebSocket(upgradedUrl, protocols)
       this._addListeners(this._channel)
     }

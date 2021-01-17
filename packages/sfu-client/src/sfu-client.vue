@@ -3,13 +3,28 @@
     <div><slot name="meeting-navbar" /></div>
     <div>
       <div>
-        <slot name="meeting-login" :attrs="attrs" :create="create" :join="join" v-if="!connectionStatus">
+        <slot
+          name="meeting-login"
+          :attrs="attrs"
+          :create="create"
+          :join="join"
+          v-if="!connectionStatus"
+        >
           <div id="login">
             <h1>WRTC</h1>
-            <input type="text" v-model="attrs.username" placeholder="USERNAME" />
+            <input
+              type="text"
+              v-model="attrs.username"
+              placeholder="USERNAME"
+            />
             <input type="text" v-model="attrs.meetingId" placeholder="ROOM" />
             <button @click="join()" :disabled="!attrs.meetingId">JOIN</button>
-            <button @click="create()" :disabled="attrs.meetingId != '' || !attrs.username">CREATE</button>
+            <button
+              @click="create()"
+              :disabled="attrs.meetingId != '' || !attrs.username"
+            >
+              CREATE
+            </button>
           </div>
         </slot>
       </div>
@@ -31,10 +46,18 @@
         </div>
       </div>
       <div class="devices" v-if="!noDevices">
-        <div v-for="(deviceGroup, i) in Object.keys(devices)" :key="i" class="device">
+        <div
+          v-for="(deviceGroup, i) in Object.keys(devices)"
+          :key="i"
+          class="device"
+        >
           <h5>{{ deviceGroup }}</h5>
           <select v-model="selectedSources[deviceGroup]">
-            <option v-for="(device, j) of devices[deviceGroup]" :key="j" :value="device.deviceId">
+            <option
+              v-for="(device, j) of devices[deviceGroup]"
+              :key="j"
+              :value="device.deviceId"
+            >
               {{ device.label }}
             </option>
           </select>
@@ -43,8 +66,12 @@
       <div>
         <slot name="options" v-if="connectionStatus">
           <button @click="close()">QUIT</button>
-          <button @click="changeTrackState('audio')">AUDIO {{ audio ? 'off' : 'on' }}</button>
-          <button @click="changeTrackState('video')">VIDEO {{ video ? 'off' : 'on' }}</button>
+          <button @click="changeTrackState('audio')">
+            AUDIO {{ audio ? 'off' : 'on' }}
+          </button>
+          <button @click="changeTrackState('video')">
+            VIDEO {{ video ? 'off' : 'on' }}
+          </button>
         </slot>
       </div>
       <div v-if="error">
@@ -55,9 +82,9 @@
 </template>
 
 <script lang="ts">
-import { SFUConnection } from './lib/sfu'
+import { SFUConnection } from '@/lib/sfu'
 import Vue from 'vue'
-import { createMessage } from './lib/message'
+import { createMessage } from '@/lib/message'
 
 export default Vue.extend({
   name: 'sfu-client',
@@ -158,7 +185,10 @@ export default Vue.extend({
       this.sfu = new SFUConnection(this.$sfuOptions)
       this.sfuEvents.forEach((event: string) => {
         const sanitizedEventName = event.split('-').join('')
-        const handlerName = `on${sanitizedEventName.charAt(0).toUpperCase().concat(sanitizedEventName.slice(1))}`
+        const handlerName = `on${sanitizedEventName
+          .charAt(0)
+          .toUpperCase()
+          .concat(sanitizedEventName.slice(1))}`
         // @ts-expect-error
         const handler = this[handlerName]?.bind(this)
         if (handler) {
@@ -195,13 +225,17 @@ export default Vue.extend({
         )
         Object.keys(this.devices).forEach((device) => {
           // @ts-expect-error
-          this.selectedSources[device] = this.devices[device] ? this.devices[device][0].deviceId : null
+          this.selectedSources[device] = this.devices[device]
+            ? this.devices[device][0].deviceId
+            : null
         })
       } catch (e) {
         console.error(e)
       }
     },
-    async getUserMedia(constraints?: MediaStreamConstraints): Promise<MediaStream | null> {
+    async getUserMedia(
+      constraints?: MediaStreamConstraints
+    ): Promise<MediaStream | null> {
       // @ts-expect-error
       let stream: MediaStream = null
       if (this.global?.navigator?.mediaDevices) {
@@ -330,7 +364,9 @@ export default Vue.extend({
         this.$set(this.streams, stream.id, stream)
         this.$nextTick(() => {
           // @ts-expect-error
-          const video: HTMLVideoElement = this.$refs[stream.id][0].getElementsByTagName('video')[0]
+          const video: HTMLVideoElement = this.$refs[
+            stream.id
+          ][0].getElementsByTagName('video')[0]
           video.srcObject = stream
           if (muted) {
             video.muted = true

@@ -16,10 +16,15 @@
     "husky": "^4.3.8",
     "lerna": "^3.22.1",
     "lerna-changelog": "^1.0.1",
-    "prettier": "^2.2.1"
+    "prettier": "^2.2.1",
+    "semantic-release": "^17.3.3",
+    "semantic-release-monorepo": "^7.0.4"
   },
   "volta": {
     "node": "14.15.4",
     "npm": "6.14.11"
+  },
+  "scripts": {
+    "semantic-release": "lerna exec --concurrency 1 --semantic-release -e semantic-release-monorepo --tag-format='${LERNA_PACKAGE_NAME}-v\\${version}'"
   }
 }

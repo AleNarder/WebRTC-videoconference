@@ -1,9 +1,9 @@
 // @ts-expect-error ts(6133)
 import adapter from 'webrtc-adapter'
 import logDown from 'logdown'
-import { WSMessage } from './message'
-import RTCConnection from './rtc'
-import { socketOptions, SignalingChannel } from './signalingChannel'
+import { WSMessage } from '@/lib/message'
+import RTCConnection from '@/lib/rtc'
+import { socketOptions, SignalingChannel } from '@/lib/signalingChannel'
 
 type sfuOptions = {
   socketOptions: socketOptions
@@ -12,7 +12,11 @@ type sfuOptions = {
 }
 
 class SFUConnection extends EventTarget {
-  private static readonly SIGNALING_CHANNEL_EVENTS = ['message', 'error', 'close']
+  private static readonly SIGNALING_CHANNEL_EVENTS = [
+    'message',
+    'error',
+    'close',
+  ]
   private static readonly RTC_CONNECTION_EVENTS = [
     'data-channel',
     'new-track',

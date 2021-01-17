@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.5](https://github.com/AleNarder/wrtc-sfu/compare/@sfu/sfu-server@0.0.4...@sfu/sfu-server@0.0.5) (2021-01-17)
+
+
+### Bug Fixes
+
+* **sfu-server:** removed postinstall script ([5388761](https://github.com/AleNarder/wrtc-sfu/commit/5388761ca01861c659cca49eee2f3af2a931be1c))
+
+
+
+
+
 ## 0.0.4 (2021-01-17)
 
 

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/AleNarder/wrtc-sfu/compare/@sfu/sfu-client-webrtc@0.2.0...@sfu/sfu-client-webrtc@0.2.1) (2021-03-21)
+
+**Note:** Version bump only for package @sfu/sfu-client-webrtc
+
+
+
+
+
 # 0.2.0 (2021-03-21)
 
 

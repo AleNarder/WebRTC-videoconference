@@ -1,5 +1,5 @@
 {
-  "name": "@sfu/sfu-client-webrtc",
+  "name": "@alexn98/sfu-client",
   "version": "0.2.2",
   "description": "A webRTC client designed to work with @sfu/sfu-server",
   "main": "dist/sfu-client.ssr.js",
@@ -55,5 +55,5 @@
   "engines": {
     "node": ">=10"
   },
-  "gitHead": "207316a6c83c4040b5a5d9dfa4e7eb70e1ad8b2c"
+  "gitHead": "c956a1e890f303e3f704b4f102e5961db7252342"
 }

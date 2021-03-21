@@ -1,5 +1,5 @@
 {
-  "name": "@sfu/sfu-server-webrtc",
+  "name": "@alexn98/sfu-server",
   "version": "0.0.10",
   "description": "",
   "main": "dist/index.js",
@@ -30,5 +30,5 @@
   "engines": {
     "node": ">=10"
   },
-  "gitHead": "207316a6c83c4040b5a5d9dfa4e7eb70e1ad8b2c"
+  "gitHead": "c956a1e890f303e3f704b4f102e5961db7252342"
 }

@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.6](https://github.com/AleNarder/wrtc-sfu/compare/@sfu/sfu-server@0.0.5...@sfu/sfu-server@0.0.6) (2021-03-21)
+
+**Note:** Version bump only for package @sfu/sfu-server
+
+
+
+
+
 ## [0.0.5](https://github.com/AleNarder/wrtc-sfu/compare/@sfu/sfu-server@0.0.4...@sfu/sfu-server@0.0.5) (2021-01-17)
 
 

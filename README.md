@@ -21,9 +21,17 @@ and server side code required to run the app.
 This repo follows the monorepo architecture and uses lerna to manage dependencies and deployments. **Lerna** and **npm** must be
 available on your machine
 
-## How to run
+## Testing locally
 
-1. Install dependencies with
+1. Install dependencies
   ```bash
   npm i
   ```
+2. Start the server in HMR mode
+   ```bash
+   lerna run serve --scope=sfu-server
+   ```
+3. Run the clien app in HMR mode
+   ```bash
+   lerna run server --scope=sfu-client
+   ```

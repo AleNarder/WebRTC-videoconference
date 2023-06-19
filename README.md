@@ -1,6 +1,6 @@
 # WebRTC Videoconference
 
-This repo contains my undergraduate thesis project, a WebRTC based videoconference app.
+This repo contains my bachelor thesis project, a WebRTC based videoconference app.
 
 ## Description
 
